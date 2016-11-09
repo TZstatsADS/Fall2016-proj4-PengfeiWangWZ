@@ -21,11 +21,17 @@ title = hdf5_getters.get_title(h5)
 filter(lambda x: x[:3] == 'get', hdf5_getters.__dict__.keys())
 
 
-duration = []
-for file in path_list:
-	try:
-		file_read = hdf5_getters.open_h5_file_read(file)
-		duration.append(hdf5_getters.get_duration(file_read))
-		file_read.close()
-	except:
-		duration.append(0)
+
+def get_list_attr(path_list, attr):
+	attr = str(attr)
+	attr_list = []
+	for file in path_list:
+		try:
+			file_read = hdf5_getters.open_h5_file_read(file)
+			attr_list.append(hdf5_getters.__getattribute__(attr)(file_read))
+			file_read.close()
+		except:
+			attr_list.append(0)
+	return(attr_list)
+
+title_list = get_list_attr(path_list, get_title)
