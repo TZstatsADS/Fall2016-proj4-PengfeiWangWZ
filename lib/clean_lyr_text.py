@@ -12,7 +12,7 @@ names = [i.split(',',1)[0] for i in dta_normal]
 values = [ast.literal_eval(''.join(("{",value[0],"}"))) for value in values]
 dictionary = dict(zip(names, values))
 df = pd.DataFrame.from_dict(dictionary)
-df = pd.transpose(df)
+df = pd.DataFrame.transpose(df)
 df = df.fillna(0)
 
-pickle.dump(df,open('/Users/pengfeiwang/Desktop/mxm_dataset_train.csv','w+'))
+pickle.dump(df,open('/Users/pengfeiwang/Desktop/mxm_dataset_train.p','w+'))

@@ -1,8 +1,7 @@
 import scipy.sparse as sparse
-from scipy.stats import rankdata
+import numpy as np
 import pandas as pd
 import skfuzzy as fuzz
-import matplotlib.pyplot as plt
 import nltk
 from sklearn.decomposition import LatentDirichletAllocation
 from nltk.corpus import stopwords
@@ -50,9 +49,8 @@ n_centers = 10
 fuzziness_degree = 2
 error = 0.005
 maxiter = 1000
-centers, predict_prob, u0, d, jm, n_iters, fpc = fuzz.cluster.cmeans(new_train, c=n_centers, m=fuzziness_degree, error=error, maxiter=maxiter, init=None)
-# cluster_result = np.argmax(predict_prob, axis=0)
+predict_prob, a, u0, d, jm, n_iters, fpc = fuzz.cluster.cmeans(new_train, c=n_centers, m=fuzziness_degree, error=error, maxiter=maxiter, init=None)
+lda_class = np.argmax(predict_prob,aixs=0).tolist()
 
-prob = zip(*[i for i in predict_prob])
-prob = [list(i) for i in prob]
-
+for i in range(n_centers):
+	print lda_class.count(i)/2350.0
