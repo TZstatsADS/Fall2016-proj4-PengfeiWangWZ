@@ -1,6 +1,6 @@
 import sys, os
-import cv2
 sys.path.append('/Users/pengfeiwang/Desktop/prj4/Fall2016-proj4-PengfeiWangWZ/lib/')
+import numpy as np
 from utilities import *
 from scipy.cluster.vq import *
 
@@ -26,17 +26,27 @@ for i in dta['segments_timbre']:
 # kmean clustering
 n_clusters = 10
 codebook = kmeans(bow_train, k)[0]
-train_clusters = kmeans2(dta, k)[1] 
-# train_clusters = vq(dta, codebook)[0]
+
+new_feature = pd.DataFrame()
+for i in range(dta.shape[0]):
+	test = dta['segments_timbre'][i].tolist()
+	train_clusters = vq(test, codebook)[0]
+	new_feature[dta.index[i]] = get_prop(train_clusters)
+
+# find the class of each song
+genre = new_feature.apply(lambda x: np.argmax(x))
+
+# KL divergence
 
 
-# todo 
-## all class = 1 => dist of words
+lyc = pd.read_csv('')
+lyc['genre'] = genre
+
+count = lyc[lyc.genre == i].map(lambda x: x.sum())
+freq[i] = count/float(count)
 
 
 
-# predict the new obs
-data = vq(obs, codebook)[0]
 
 ## calculate the percent of each class, then sum(percent * distribution)
 

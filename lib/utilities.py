@@ -43,7 +43,11 @@ def ls2df(path_list, feature_selected):
 	return(df)
 
 
-
-
+# count the proportion of result
+def get_prop(alist):
+	alist = list(alist)
+	cls = range(10)
+	prop = [alist.count(i)/float(len(alist)) for i in cls]
+	return(dict(zip(cls, prop)).values())
 
 
