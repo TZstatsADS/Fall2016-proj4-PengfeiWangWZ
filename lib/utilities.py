@@ -50,4 +50,12 @@ def get_prop(alist):
 	prop = [alist.count(i)/float(len(alist)) for i in cls]
 	return(dict(zip(cls, prop)).values())
 
-
+# soft classification
+def get_sc(dta, codebook):
+	dis = []
+	new_feature = pd.DataFrame()
+	for i in range(dta.shape[0]):
+		test = dta['segments_timbre'][i].tolist()
+		train_clusters = vq(test, codebook)[0]
+		new_feature[dta.index[i]] = get_prop(train_clusters)
+	return(new_feature)
