@@ -1,4 +1,4 @@
-# Project: Words 4 Music
+# Project: A_W_K_Word!!😱
 
 ### [Project Description](doc/Project4_desc.md)
 
@@ -8,9 +8,12 @@ Term: Fall 2016
 
 + [Data link](https://courseworks2.columbia.edu/courses/11849/files/folder/Project_Files?preview=763391)-(**courseworks login required**)
 + [Data description](doc/readme.html)
-+ Contributor's name:
-+ Projec title: Lorem ipsum dolor sit amet
-+ Project summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
++ Contributor's name: Pengfei Wang
++ Projec title: Words 4 Music
++ Project summary: 
+	+ Extracted discriminative MFCC features and used K-means to do dimention reduction
+	+ Mapped features with codebook and classified the songs according to majority vote
+	+ Constructed Dictionary and Corpus for Latent Dirichlet Allocation Model (LDA) basing on bag-of-words 
 	
 Following [suggestions](http://nicercode.github.io/blog/2013-04-05-projects/) by [RICH FITZJOHN](http://nicercode.github.io/about/#Team) (@richfitz). This folder is orgarnized as follows.
 
