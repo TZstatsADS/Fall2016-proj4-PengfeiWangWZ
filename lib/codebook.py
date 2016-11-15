@@ -43,12 +43,12 @@ for i in range(dta.shape[0]):
 
 # find the class of each song
 genre = new_feature.apply(lambda x: np.argmax(x))
-# genre.tp_csv('/Users/pengfeiwang/Desktop/prj4/Project4_data/cla.csv',index = None)
+# genre.to_csv('/Users/pengfeiwang/Desktop/prj4/Project4_data/cla.csv',index = None)
 
 
 # dist of each songs
 lyc = pd.read_csv('/Users/pengfeiwang/Desktop/prj4/Project4_data/lyr_new.csv',index_col = ['track_id'])
-genre = pd.read_csv('/Users/pengfeiwang/Desktop/prj4/Project4_data/cla.csv',header=None)
+genre = pd.read_csv('/Users/pengfeiwang/Desktop/prj4/Project4_data/cla.csv',header = None)
 lyc_c = lyc.copy()
 cla = genre.ix[:,0].tolist()
 lyc_c['genre'] = cla

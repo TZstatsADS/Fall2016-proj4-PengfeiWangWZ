@@ -5,10 +5,10 @@ from scipy.stats import rankdata
 from scipy.cluster.vq import *
 
 
-
-dta = ls2df(path_list, selected_feature) # test path_list
+# test path_list
+dta = ls2df(path_list, selected_feature) 
 codebook = pickle.load(open('','rb')) 
-new_feature =  get_sc(dta, codebook)
+new_feature = get_sc(dta, codebook)
 
 
 # load the worc dist of each class

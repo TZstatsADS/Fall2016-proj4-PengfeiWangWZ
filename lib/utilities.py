@@ -50,6 +50,7 @@ def get_prop(alist):
 	prop = [alist.count(i)/float(len(alist)) for i in cls]
 	return(dict(zip(cls, prop)).values())
 
+
 # soft classification
 def get_sc(dta, codebook):
 	dis = []

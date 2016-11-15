@@ -9,6 +9,7 @@ word_prop = word_count/float(sum(word_count))
 rank_bm = rankdata(word_prop)
 # np.savetxt('/Users/pengfeiwang/Desktop/benchmark.csv', rank_bm, delimiter=",")
 
+
 # train-vali split
 seed = 2016
 random.seed(seed)

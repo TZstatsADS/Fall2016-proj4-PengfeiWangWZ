@@ -2,6 +2,10 @@ import pandas as pd
 import ast
 import pickle
 
+'''
+Clean mxm_dataset_train.txt
+'''
+
 with open('/Users/pengfeiwang/Desktop/prj4/Project4_data/mxm_dataset_train.txt','rb') as g:
 	dta = g.readlines()
 
