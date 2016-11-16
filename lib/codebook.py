@@ -4,14 +4,11 @@ import numpy as np
 import pandas as pd
 from utilities import *
 from scipy.cluster.vq import *
-from sklearn.multioutput import MultiOutputRegressor
-from sklearn.ensemble import GradientBoostingRegressor
 
 
-# all the h5 file path
+# get h5 file path
 base_path = '/Users/pengfeiwang/Desktop/prj4/Project4_data/data/'
 path_list =  get_file_path(base_path)
-
 
 all_features = ["get_bars_confidence", "get_bars_start", "get_beats_confidence", "get_beats_start", \
 				"get_sections_confidence", "get_sections_start", "get_segments_confidence", \
@@ -19,10 +16,9 @@ all_features = ["get_bars_confidence", "get_bars_start", "get_beats_confidence",
 			    "get_segments_loudness_start", "get_segments_start", "get_segments_timbre", \
 			    "get_tatums_confidence", "get_tatums_start"]
 
-selected_feature = ['get_segments_timbre']
-# get_segments_pitches 
-# get_bars_confidence get_beats_confidence get_segments_loudness_max
-dta = ls2df(path_list, selected_feature) # (2350, 1)
+selected_feature = ['get_segments_timbre', 'get_segments_pitches']
+stat = ["get_bars_confidence", "get_beats_confidence", "get_segments_loudness_max"]
+dta = ls2df(path_list, selected_feature)
 
 
 bow_train = []
@@ -33,10 +29,10 @@ for i in dta['segments_timbre']:
 # kmean clustering
 n_clusters = 50
 codebook = kmeans(bow_train, n_clusters)[0]
-# codebook = pickle.dump(codebook, open('','rb')) 
+codebook = pickle.dump(codebook, open('/Users/pengfeiwang/Desktop/prj4/Project4_data/timbre.p','rb')) 
 
 
-codebook_timbre = pickle.load(open('','rb')) 
+codebook_timbre = pickle.load(open('/Users/pengfeiwang/Desktop/prj4/Project4_data/timbre.p','rb')) 
 new_timbre = pd.DataFrame()
 dis = []
 for i in range(dta.shape[0]):
@@ -49,8 +45,10 @@ for i in range(dta.shape[0]):
 	new_timbre[dta.index[i]] = get_prop(train_clusters)
 
 new_timbre = new_timbre.transpose()
+new_timbre.to_csv('/Users/pengfeiwang/Desktop/prj4/Project4_data/timbre.csv')
 
-codebook_pitch = pickle.load(open('','rb'))
+
+codebook_pitch = pickle.load(open('/Users/pengfeiwang/Desktop/prj4/Project4_data/pitch.p','rb'))
 new_pitch = pd.DataFrame()
 dis = []
 for i in range(dta.shape[0]):
@@ -59,29 +57,9 @@ for i in range(dta.shape[0]):
 	new_pitch[dta.index[i]] = get_prop(train_clusters)
 
 new_pitch = new_pitch.transpose()
+new_pitch.to_csv('/Users/pengfeiwang/Desktop/prj4/Project4_data/pitch.csv')
 
 
-# find the class of each song
-# genre = new_timbre.apply(lambda x: np.argmax(x))
-# genre.to_csv('/Users/pengfeiwang/Desktop/prj4/Project4_data/cla.csv',index = None)
 
 
-# dist of each songs
-# lyc = pd.read_csv('/Users/pengfeiwang/Desktop/prj4/Project4_data/lyr_new.csv',index_col = ['track_id'])
-# genre = pd.read_csv('/Users/pengfeiwang/Desktop/prj4/Project4_data/cla.csv',header = None)
-# lyc_c = lyc.copy()
-# cla = genre.ix[:,0].tolist()
-# lyc_c['genre'] = cla
 
-# freq = pd.DataFrame()
-# for i in range(max(cla)+1):
-# 	print i
-# 	count = lyc[lyc_c.genre == i].sum(axis=0).tolist()
-# 	freq[i] = [j/float(sum(count)) for j in count]
-
-## calculate the percent of each class, then sum(percent * distribution)
-
-
-x = pd.merge(new_timbre, new_pitch, left_index = True, right_index = True)
-y = pd.read_csv('/Users/pengfeiwang/Desktop/prj4/Project4_data/lyr_new.csv', index_col=['track_id'])
-result = MultiOutputRegressor(GradientBoostingRegressor(random_state=0)).fit(x, y).predict(x)

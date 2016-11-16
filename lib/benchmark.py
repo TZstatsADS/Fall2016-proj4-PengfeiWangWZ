@@ -41,4 +41,4 @@ for i in range(vali.shape[0]):
 	a.append(b)
 
 np.mean(a)/((1+5000)/2)
-# 157.22661475780893
+# 1.73
