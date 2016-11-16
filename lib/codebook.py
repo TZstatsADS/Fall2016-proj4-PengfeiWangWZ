@@ -1,4 +1,4 @@
-import sys, os
+import sys, os, pickle
 sys.path.append('/Users/pengfeiwang/Desktop/prj4/Fall2016-proj4-PengfeiWangWZ/lib/')
 import numpy as np
 import pandas as pd
@@ -31,7 +31,7 @@ for i in dta['segments_timbre']:
 
 
 # kmean clustering
-n_clusters = 10
+n_clusters = 50
 codebook = kmeans(bow_train, n_clusters)[0]
 # codebook = pickle.dump(codebook, open('','rb')) 
 

@@ -6,7 +6,7 @@ from scipy.stats import rankdata
 def calu_result(benchmark_df, test_data):
 	new_df = pd.concat([benchmark_df,test_data])
 	# pd.concat([dist,vali.iloc[[0]]])
-	mean_rank = new_df.iloc[[0]].loc[:, new_df.iloc[1] != 0].sum(axis=1)[0]/2350
+	mean_rank = new_df.iloc[[0]].loc[:, new_df.iloc[1] != 0].sum(axis=1)[0]/sum(new_df.iloc[1] != 0)
 	return(mean_rank)
 
 
@@ -21,12 +21,12 @@ seed = 2016
 random.seed(seed)
 s_index = dta.index.tolist()
 random.shuffle(s_index)
-train = s_index[235:]
-vali = s_index[:235]
+train_index = s_index[235:]
+vali_index = s_index[:235]
 
 
-train = dta.loc[train]
-vali = dta.loc[vali]
+train = dta.loc[train_index]
+vali = dta.loc[vali_index]
 
 dist = rankdata(train.sum())
 dist = pd.DataFrame(dist)
@@ -37,6 +37,8 @@ dist.columns = train.columns
 a = []
 for i in range(vali.shape[0]):
 	b = calu_result(dist, vali.iloc[[i]])
+	print b
 	a.append(b)
 
+np.mean(a)/((1+5000)/2)
 # 157.22661475780893
