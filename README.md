@@ -11,7 +11,7 @@ Term: Fall 2016
 + Contributor's name: Pengfei Wang
 + Projec title: Words 4 Music
 + Project summary: 
-	+ Extracted discriminative MFCC features and used K-means to do dimention reduction
+	+ Extracted discriminative MFCC features and used K-means to do dimension reduction
 	+ Mapped features with codebook and classified the songs according to majority vote
 	+ Constructed Dictionary and Corpus for Latent Dirichlet Allocation Model (LDA) basing on bag-of-words 
 	
