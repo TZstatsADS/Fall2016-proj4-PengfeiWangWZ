@@ -27,7 +27,7 @@ for i in dta['segments_timbre']:
 
 
 # kmean clustering
-n_clusters = 50
+n_clusters = 10
 codebook = kmeans(bow_train, n_clusters)[0]
 codebook = pickle.dump(codebook, open('/Users/pengfeiwang/Desktop/prj4/Project4_data/timbre.p','rb')) 
 
