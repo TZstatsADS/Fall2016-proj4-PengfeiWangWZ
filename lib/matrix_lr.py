@@ -24,6 +24,6 @@ x = x.values
 x[np.isnan(x)]=0 # => (2350, 12)
 
 # x * b + c = y
-b = np.linalg.lstsq(x, y)[0] # => (12, 4973)
-c = np.linalg.lstsq(x, y)[1] # => (4973, )
+# b = np.linalg.lstsq(x, y)[0] # => (12, 4973)
+# c = np.linalg.lstsq(x, y)[1] # => (4973, )
 
